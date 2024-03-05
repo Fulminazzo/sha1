@@ -1,5 +1,6 @@
 #include "message.h"
 #include <string.h>
+#include <stdlib.h>
 
 ulong preprocess_message(uchar *dst, const char *src) {
     const ulong length = strlen(src);
