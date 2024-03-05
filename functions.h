@@ -5,4 +5,6 @@
 
 WORD s(WORD x, int n);
 
+long k(int t);
+
 #endif //SHA1_FUNCTIONS_H
