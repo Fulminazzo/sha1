@@ -1,7 +1,9 @@
 #ifndef SHA1_MESSAGE_H
 #define SHA1_MESSAGE_H
 
+#ifndef BITS_PER_BYTE
 #define BITS_PER_BYTE 8
+#endif
 
 #define BYTES_LENGTH 64
 #define BYTES_SIZE_LENGTH 8
