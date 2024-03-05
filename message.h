@@ -10,11 +10,15 @@
 #define SEPARATOR 128
 #define PADDING 0
 
+#define INVALID_LENGTH_PROVIDED 100
+
 #include "utils.h"
 
 /**
  * @return the final size of the message
  */
-unsigned long int preprocess_message(uchar *dst, const char *src);
+ulong preprocess_message(uchar *dst, const char *src);
+
+void deprocess_message(char *dst, const uchar *src, ulong size);
 
 #endif //SHA1_MESSAGE_H
