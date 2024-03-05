@@ -20,3 +20,21 @@ ulong preprocess_message(uchar *dst, const char *src) {
 
     return i + BYTES_SIZE_LENGTH;
 }
+
+void deprocess_message(char *dst, const uchar *src, ulong size) {
+    ulong length;
+    ulong i, value, shift;
+
+    if (size % BYTES_LENGTH != 0) exit(INVALID_LENGTH_PROVIDED);
+
+    length = 0;
+    for (i = 0; i < BYTES_SIZE_LENGTH; i++) {
+        value = src[size - i - 1];
+        shift = i * sizeof(ulong);
+        value = value << shift;
+        length += value;
+    }
+    length /= BITS_PER_BYTE;
+
+
+}
