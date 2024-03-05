@@ -8,6 +8,9 @@
 #define SEPARATOR 128
 #define PADDING 0
 
-void preprocess_message(char *dst, const char *src);
+/**
+ * @return the final size of the message
+ */
+unsigned long int preprocess_message(unsigned char *dst, const char *src);
 
 #endif //SHA1_MESSAGE_H
