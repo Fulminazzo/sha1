@@ -10,6 +10,6 @@
 
 long int power(long int n, long int i);
 
-void write_to_string(uchar *dst, ulong num, int from);
+void write_to_string(uchar *dst, ulong num, ulong from);
 
 #endif //SHA1_UTILS_H

@@ -6,7 +6,7 @@ long int power(long int n, long int i) {
     else return n * power(n, i - 1);
 }
 
-void write_to_string(uchar *dst, ulong num, int from) {
+void write_to_string(uchar *dst, ulong num, ulong from) {
     const ulong char_size = sizeof(uchar);
     const ulong num_size = sizeof(ulong);
     const ulong to_print = num_size / char_size;
