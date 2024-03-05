@@ -11,7 +11,7 @@ int get_mask() {
     return power(2, BITS_PER_BYTE) - 1;
 }
 
-void preprocess_message(char *dst, const char *src) {
+void preprocess_message(unsigned char *dst, const char *src) {
     const size_t length = strlen(src);
     size_t i, bits;
     const int mask = get_mask();
