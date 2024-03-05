@@ -1,0 +1,4 @@
+#ifndef SHA1_MESSAGE_H
+#define SHA1_MESSAGE_H
+
+#endif //SHA1_MESSAGE_H
