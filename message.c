@@ -7,10 +7,14 @@ int power(const int n, const int i) {
     else return n * power(n, i - 1);
 }
 
+int get_mask() {
+    return power(2, BITS_PER_BYTE) - 1;
+}
+
 void preprocess_message(char *dst, const char *src) {
     const size_t length = strlen(src);
     size_t i, bits;
-    const int mask = power(2, BITS_PER_BYTE) - 1;
+    const int mask = get_mask();
     int shift;
 
     for (i = 0; i != length; i++) dst[i] = src[i];
