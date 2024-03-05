@@ -36,5 +36,5 @@ void deprocess_message(char *dst, const uchar *src, ulong size) {
     }
     length /= BITS_PER_BYTE;
 
-
+    for (i = 0; i < length; i++) dst[i] = src[i];
 }
