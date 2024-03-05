@@ -1,0 +1,4 @@
+#ifndef SHA1_FUNCTIONS_H
+#define SHA1_FUNCTIONS_H
+
+#endif //SHA1_FUNCTIONS_H
