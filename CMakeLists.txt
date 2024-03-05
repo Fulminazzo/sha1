@@ -5,4 +5,6 @@ set(CMAKE_C_STANDARD 11)
 
 add_library(sha1 STATIC sha1.c
         message.c
-        message.h)
+        message.h
+        utils.c
+        utils.h)
