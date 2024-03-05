@@ -6,7 +6,7 @@
 #endif
 
 #define uchar unsigned char
-#define ulong unsigned long int
+#define ulong long
 
 long int power(long int n, long int i);
 
