@@ -1,6 +1,15 @@
 #ifndef SHA1_UTILS_H
 #define SHA1_UTILS_H
 
-int power(int n, int i);
+#ifndef BITS_PER_BYTE
+#define BITS_PER_BYTE 8
+#endif
+
+#define uchar unsigned char
+#define ulong unsigned long int
+
+long int power(long int n, long int i);
+
+void write_to_string(uchar *dst, ulong num, int from);
 
 #endif //SHA1_UTILS_H
