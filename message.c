@@ -5,11 +5,17 @@
 ulong preprocess_message(uchar *dst, const char *src) {
     const ulong length = strlen(src);
     ulong i, bits;
+    int c, *tmp;
 
-    for (i = 0; i != length; i++) dst[i] = src[i];
+    tmp = (int *) dst;
+    for (i = 0; i < length; i += sizeof(int)) {
+        c = chars_to_int(src + i);
+        tmp[i / sizeof(int)] = c;
+    }
+    if (i > length + 1) i = length + 1;
 
     // Set separator bit
-    dst[i++] = (char) SEPARATOR;
+    dst[0] = (char) SEPARATOR;
 
     while ((i + BYTES_SIZE_LENGTH) % BYTES_LENGTH != 0)
         dst[i++] &= PADDING;
