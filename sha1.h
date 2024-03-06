@@ -4,9 +4,10 @@
 #define MESSAGE_SIZE 65536
 #define WORDS_PER_ITERATION 16
 #define ITERATIONS 80
-#define MASK 0x0000000F
 
-#define WORD int
+#ifndef WORD
+#define WORD unsigned int
+#endif
 
 #include "functions.h"
 #include "message.h"
