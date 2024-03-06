@@ -2,6 +2,11 @@
 #define SHA1_SHA1_H
 
 #define MESSAGE_SIZE 65536
+#define WORDS_PER_ITERATION 16
+#define ITERATIONS 80
+#define MASK 0x0000000F
+
+#define WORD int
 
 #include "functions.h"
 #include "message.h"
