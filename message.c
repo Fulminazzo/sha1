@@ -25,7 +25,6 @@ ulong preprocess_message(uchar *dst, const char *src) {
     // Convert length to bits
     bits = length * BITS_PER_BYTE;
 
-    write_to_string(dst, bits, i);
     tmp[i / size] = 0;
     tmp[i / size + 1] = bits;
 
