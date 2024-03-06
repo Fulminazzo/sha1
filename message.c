@@ -5,19 +5,20 @@
 ulong preprocess_message(uchar *dst, const char *src) {
     const ulong length = strlen(src), int_size = sizeof(unsigned int);
     ulong i, bits;
-    unsigned int c, *tmp;
+    unsigned int *tmp;
+
+#define SHIFT(i) ((int_size - i % int_size - 1) * BITS_PER_BYTE)
 
     memset(dst, 0, length);
     tmp = (unsigned int *) dst;
 
     for (i = 0; i < length; i++) {
-        c = (int_size - i % int_size - 1) * BITS_PER_BYTE;
-        tmp[i / int_size] += src[i] << c;
+        tmp[i / int_size] += src[i] << SHIFT(i);
     }
-    i++;
 
     // Set separator bit
-    dst[i - int_size] = (unsigned char) SEPARATOR;
+    tmp[i / int_size] += SEPARATOR << SHIFT(i);
+    i++;
 
     // Set padding
     while ((i + BYTES_SIZE_LENGTH) % BYTES_LENGTH != 0)
