@@ -7,4 +7,7 @@ add_library(sha1 STATIC sha1.c
         message.c
         message.h
         utils.c
-        utils.h)
+        utils.h
+        functions.c
+        functions.h
+)
