@@ -1,5 +1,7 @@
 #include "sha1.h"
+#include "message.h"
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -9,13 +11,6 @@ void init_vars(SHA1vars *h) {
     h->c = 0x98BADCFE;
     h->d = 0x10325476;
     h->e = 0xC3D2E1F0;
-}
-
-void print_starting_point(unsigned int *tmp) {
-    printf("Printing starting point: ");
-    for (int i = 0; i < 16; i++)
-        printf("%02x ", tmp[i]);
-    printf("\n");
 }
 
 void computeSHA1_M(Message *message, SHA1vars *h) {
