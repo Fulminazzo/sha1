@@ -1,11 +1,11 @@
 #ifndef SHA1_FUNCTIONS_H
 #define SHA1_FUNCTIONS_H
 
-#define WORD int
+#include "utils.h"
 
-WORD s(WORD x, int n);
+ulong s(ulong x, int n);
 
-WORD f(int t, WORD b, WORD c, WORD d);
+ulong f(int t, ulong b, ulong c, ulong d);
 
 long k(int t);
 

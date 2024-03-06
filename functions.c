@@ -1,10 +1,10 @@
 #include "functions.h"
 
-WORD s(WORD x, int n) {
+ulong s(ulong x, int n) {
     return (x << n) | (x >> (32 - n));
 }
 
-WORD f(int t, WORD b, WORD c, WORD d) {
+ulong f(int t, ulong b, ulong c, ulong d) {
     if (0 <= t && t <= 19)
         return (b & c) | ((!b) & d);
     if (20 <= t && t <= 39)
