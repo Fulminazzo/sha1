@@ -36,19 +36,21 @@ ulong preprocess_message(uchar *dst, const char *src) {
 }
 
 void deprocess_message(char *dst, const uchar *src, ulong size) {
-    ulong length;
-    ulong i, value, shift;
+    ulong length, int_size = sizeof(int);
+    ulong i, index;
+    unsigned int c, j, *tmp;
 
     if (size % BYTES_LENGTH != 0) exit(INVALID_LENGTH_PROVIDED);
 
-    length = 0;
-    for (i = 0; i < BYTES_SIZE_LENGTH; i++) {
-        value = src[size - i - 1];
-        shift = i * sizeof(ulong);
-        value = value << shift;
-        length += value;
-    }
-    length /= BITS_PER_BYTE;
+    index = size / int_size - 1;
+    length = ((int *) src)[index] / BITS_PER_BYTE;
 
-    for (i = 0; i < length; i++) dst[i] = src[i];
+    memset(dst, 0, length);
+    tmp = (unsigned int *) src;
+
+    for (i = 0; i < length; i++) {
+        c = tmp[i / int_size] >> SHIFT(i);
+        c = c & 127;
+        dst[i] = (char) c;
+    }
 }
