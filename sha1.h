@@ -25,4 +25,6 @@ typedef struct SHA1vars_s {
     WORD e;
 } SHA1vars;
 
+void computeSHA1(char *dst, const char *src);
+
 #endif //SHA1_SHA1_H
