@@ -2,12 +2,12 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define SHIFT(i) ((int_size - i % int_size - 1) * BITS_PER_BYTE)
+
 ulong preprocess_message(uchar *dst, const char *src) {
     const ulong length = strlen(src), int_size = sizeof(unsigned int);
     ulong i, bits;
     unsigned int *tmp;
-
-#define SHIFT(i) ((int_size - i % int_size - 1) * BITS_PER_BYTE)
 
     memset(dst, 0, length);
     tmp = (unsigned int *) dst;
@@ -18,7 +18,9 @@ ulong preprocess_message(uchar *dst, const char *src) {
 
     // Set separator bit
     tmp[i / int_size] += SEPARATOR << SHIFT(i);
-    i++;
+
+    // Avoid override of current word
+    while (i % int_size != 0) i++;
 
     // Set padding
     while ((i + BYTES_SIZE_LENGTH) % BYTES_LENGTH != 0)
