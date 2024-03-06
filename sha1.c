@@ -20,11 +20,8 @@ void print_starting_point(unsigned int *tmp) {
 
 void computeSHA1_M(Message *message, SHA1vars *h) {
     SHA1vars tmp;
-    int t, l, i;
-    WORD val;
-    WORD temp;
-    printf("Compute sha\n");
-    print_starting_point(message->words);
+    int t;
+    WORD val, temp;
 
     tmp.a = h->a;
     tmp.b = h->b;
@@ -32,32 +29,27 @@ void computeSHA1_M(Message *message, SHA1vars *h) {
     tmp.d = h->d;
     tmp.e = h->e;
 
-    for (t = 0; t < 17; t++) {
-//        l = t & MASK;
+    for (t = 0; t < ITERATIONS; t++) {
 
-//        if (t >= 16) {
-//            i = (l + 13) & MASK;
-//            val = message->words[i];
-//            i = (l + 8) & MASK;
-//            val = val ^ message->words[i];
-//            i = (l + 2) & MASK;
-//            val = val ^ message->words[i];
-//            val = val ^ message->words[l];
-//            val = (WORD) rotate_left(val, 1);
-//            message->words[l] = val;
-//        }
+        // Extend words to 80.
+        if (t >= 32) {
+            val = message->words[t - 6];
+            val ^= message->words[t - 16];
+            val ^= message->words[t - 28];
+            val ^= message->words[t - 32];
+            val = rotate_left(val, 2);
+        } else if (t >= 16) {
+            val = message->words[t - 3];
+            val ^= message->words[t - 8];
+            val ^= message->words[t - 14];
+            val ^= message->words[t - 16];
+            val = rotate_left(val, 1);
+        } else val = message->words[t];
+        message->words[t] = val;
 
-        int f = calculate_f(t, tmp.b, tmp.c, tmp.d);
-        int y = calculate_k(t);
 
-        if (t == 0) {
-            //TODO: why are these not equal? Check message struct
-            printf("words 0: %02x\n",message->words[t]);
-        }
-        temp = rotate_left(tmp.a, 5) + f + tmp.e + y
-                + message->words[t];
-        if (t == 0)
-        printf("(%d) temp: %d\n", t, temp);
+        temp = calculate_f(t, tmp.b, tmp.c, tmp.d);
+        temp = rotate_left(tmp.a, 5) + temp + tmp.e + get_k(t) + message->words[t];
 
         tmp.e = tmp.d;
         tmp.d = tmp.c;
@@ -65,7 +57,6 @@ void computeSHA1_M(Message *message, SHA1vars *h) {
         tmp.b = tmp.a;
         tmp.a = temp;
     }
-//    printf("compute single: %s\n", message->bytes);
 
     h->a += tmp.a;
     h->b += tmp.b;
