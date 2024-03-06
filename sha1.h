@@ -11,4 +11,12 @@ typedef union Message_s {
     WORD words[MESSAGE_SIZE / sizeof(WORD)];
 } Message;
 
+typedef struct SHA1vars_s {
+    ulong a;
+    ulong b;
+    ulong c;
+    ulong d;
+    ulong e;
+} SHA1vars;
+
 #endif //SHA1_SHA1_H
