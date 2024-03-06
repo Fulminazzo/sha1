@@ -17,7 +17,7 @@ ulong preprocess_message(uchar *dst, const char *src) {
     i++;
 
     // Set separator bit
-    dst[0] = (char) SEPARATOR;
+    dst[i - int_size] = (unsigned char) SEPARATOR;
 
     // Set padding
     while ((i + BYTES_SIZE_LENGTH) % BYTES_LENGTH != 0)
