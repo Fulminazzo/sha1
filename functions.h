@@ -5,10 +5,10 @@
 #define WORD unsigned int
 #endif
 
-ulong s(ulong x, int n);
+WORD rotate_left(WORD value, int bits);
 
-ulong f(int t, ulong b, ulong c, ulong d);
+WORD calculate_f(int t, WORD b, WORD c, WORD d);
 
-long k(int t);
+WORD get_k(int t);
 
 #endif //SHA1_FUNCTIONS_H

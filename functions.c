@@ -1,12 +1,12 @@
 #include "functions.h"
 
-ulong s(ulong x, int n) {
-    return (x << n) | (x >> (32 - n));
+WORD rotate_left(WORD value, int bits) {
+    return (value << bits) | (value >> (32 - bits));
 }
 
-ulong f(int t, ulong b, ulong c, ulong d) {
+WORD calculate_f(int t, WORD b, WORD c, WORD d) {
     if (0 <= t && t <= 19)
-        return (b & c) | ((!b) & d);
+        return (b & c) | ((~b) & d);
     if (20 <= t && t <= 39)
         return b ^ c ^ d;
     if (40 <= t && t <= 59)
@@ -16,7 +16,7 @@ ulong f(int t, ulong b, ulong c, ulong d) {
     return -1;
 }
 
-long k(int t) {
+WORD get_k(int t) {
     if (0 <= t && t <= 19) return 0x5A827999;
     if (20 <= t && t <= 39) return 0x6ED9EBA1;
     if (40 <= t && t <= 59) return 0x8F1BBCDC;
