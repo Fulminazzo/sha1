@@ -68,48 +68,31 @@ void computeSHA1_M(Message *message, SHA1vars *h) {
 void computeSHA1(char *dst, const char *src) {
     SHA1vars h;
     Message *messages;
-    const char tmp[MESSAGE_SIZE];
-    ulong length, ws, i;
-    const ulong words_size = (sizeof(WORD) * BITS_PER_BYTE);
-    const ulong chars_per_iteration = WORDS_PER_ITERATION * words_size / BITS_PER_BYTE / sizeof(uchar);
+    uchar tmp[MESSAGE_SIZE];
+    ulong message_length, messages_size, i, j;
+    const ulong word_size = (sizeof(WORD) * BITS_PER_BYTE);
+
+#define WORD_PTR(ptr) ((WORD*) ptr)
 
     init_vars(&h);
-    length = preprocess_message(tmp, src) * BITS_PER_BYTE;
-    printf("Length: %d\n", length);
-//    if(1) return;
 
-    ws = length / words_size / WORDS_PER_ITERATION;
-    messages = malloc(sizeof(messages) * ws);
+    message_length = preprocess_message(tmp, src) * BITS_PER_BYTE;
 
-    for (i = 0; i < ws; i++) {
-        for (int j = 0; j < WORDS_PER_ITERATION; j++)
-            messages[i].words[i] = ((int*) tmp)[i * WORDS_PER_ITERATION + j];
-//        for (int j = 0; j < chars_per_iteration; j++) {
-//            messages[i].bytes[j] = tmp[i * chars_per_iteration + j];
-//        }
-        printf("messages[0]: %02x\n", messages[i].words[0]);
-        printf("messages[1]: %02x\n", messages[i].words[1]);
-        printf("messages[2]: %02x\n", messages[i].words[2]);
+    messages_size = message_length / word_size / WORDS_PER_ITERATION;
+    messages = malloc(sizeof(Message) * messages_size);
 
-        //TODO: remove this
-        memset(messages[i].words, 0, 32);
-        messages[i].words[0] = 0x61626380;
-        messages[i].bytes[5] = 0;
-        messages[i].words[15] = 0x18;
-        print_starting_point(messages[i].words);
+    for (i = 0; i < messages_size; i++) {
+        for (j = 0; j < WORDS_PER_ITERATION; j++)
+            messages[i].words[j] = WORD_PTR(tmp)[i * WORDS_PER_ITERATION + j];
 
         computeSHA1_M(&(messages[i]), &h);
-
-        for (int j = 0; j < chars_per_iteration; j++)
-            dst[i * chars_per_iteration + j] = (char) messages[i].bytes[j];
     }
 
-    printf("%08x", h.a);
-    printf("%08x", h.b);
-    printf("%08x", h.c);
-    printf("%08x", h.d);
-    printf("%08x", h.e);
-    printf("\n");
+    WORD_PTR(dst)[0] = h.a;
+    WORD_PTR(dst)[1] = h.b;
+    WORD_PTR(dst)[2] = h.c;
+    WORD_PTR(dst)[3] = h.d;
+    WORD_PTR(dst)[4] = h.e;
 
     free(messages);
 }
