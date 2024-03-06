@@ -12,12 +12,12 @@ ulong preprocess_message(uchar *dst, const char *src) {
     memset(dst, 0, length);
     tmp = (unsigned int *) dst;
 
-    for (i = 0; i < length; i++) {
+    for (i = 0; i < length; i++)
         tmp[i / int_size] += src[i] << SHIFT(i);
-    }
 
     // Set separator bit
     tmp[i / int_size] += SEPARATOR << SHIFT(i);
+    i++;
 
     // Avoid override of current word
     while (i % int_size != 0) i++;
