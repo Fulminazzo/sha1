@@ -11,9 +11,10 @@ ulong preprocess_message(uchar *dst, const char *src) {
     tmp = (unsigned int *) dst;
 
     for (i = 0; i < length; i++) {
-        c = (int_size - i - 1) * BITS_PER_BYTE;
+        c = (int_size - i % int_size - 1) * BITS_PER_BYTE;
         tmp[i / int_size] += src[i] << c;
     }
+    i++;
 
     // Set separator bit
     dst[0] = (char) SEPARATOR;
