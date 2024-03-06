@@ -13,8 +13,8 @@
 #include "message.h"
 
 typedef union Message_s {
-    uchar bytes[MESSAGE_SIZE];
-    WORD words[MESSAGE_SIZE / sizeof(WORD)];
+    uchar bytes[ITERATIONS * sizeof(WORD) / sizeof(uchar)];
+    WORD words[ITERATIONS];
 } Message;
 
 typedef struct SHA1vars_s {
