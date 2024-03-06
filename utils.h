@@ -12,4 +12,10 @@ long int power(long int n, long int i);
 
 void write_to_string(uchar *dst, ulong num, ulong from);
 
+/**
+ * Converts the given array of character into an integer.
+ * Takes into account the Little-Endian convention.
+ */
+int chars_to_int(const char *src);
+
 #endif //SHA1_UTILS_H

@@ -20,3 +20,14 @@ void write_to_string(uchar *dst, ulong num, ulong from) {
         dst[from + i] = value;
     }
 }
+
+int chars_to_int(const char *src) {
+    int tmp = 0;
+
+    tmp += src[3];
+    tmp += src[2] << 8;
+    tmp += src[1] << 16;
+    tmp += src[0] << 24;
+
+    return tmp;
+}
