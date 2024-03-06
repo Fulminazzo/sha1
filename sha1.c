@@ -2,8 +2,6 @@
 #include "message.h"
 
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
 void init_vars(SHA1vars *h) {
     h->a = 0x67452301;
