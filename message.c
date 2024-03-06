@@ -3,17 +3,16 @@
 #include <stdlib.h>
 
 ulong preprocess_message(uchar *dst, const char *src) {
-    const ulong length = strlen(src), size = sizeof(unsigned int);
+    const ulong length = strlen(src), int_size = sizeof(unsigned int);
     ulong i, bits;
     unsigned int c, *tmp;
 
     tmp = (unsigned int *) dst;
 
-    for (i = 0; i < length; i += size) {
-        c = chars_to_int(src + i);
-        tmp[i / size] = c;
+    for (i = 0; i < length; i++) {
+        c = (int_size - i - 1) * BITS_PER_BYTE;
+        tmp[i / int_size] += src[i] << c;
     }
-    if (i > length + 1) i = length + 1;
 
     // Set separator bit
     dst[0] = (char) SEPARATOR;
@@ -25,8 +24,8 @@ ulong preprocess_message(uchar *dst, const char *src) {
     // Convert length to bits
     bits = length * BITS_PER_BYTE;
 
-    tmp[i / size] = 0;
-    tmp[i / size + 1] = bits;
+    tmp[i / int_size] = 0;
+    tmp[i / int_size + 1] = bits;
 
     return i + BYTES_SIZE_LENGTH;
 }

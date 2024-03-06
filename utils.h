@@ -10,10 +10,4 @@
 
 long int power(long int n, long int i);
 
-/**
- * Converts the given array of character into an integer.
- * Takes into account the Little-Endian convention.
- */
-int chars_to_int(const char *src);
-
 #endif //SHA1_UTILS_H
