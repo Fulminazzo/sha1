@@ -1,7 +1,9 @@
 #ifndef SHA1_FUNCTIONS_H
 #define SHA1_FUNCTIONS_H
 
-#include "utils.h"
+#ifndef WORD
+#define WORD unsigned int
+#endif
 
 ulong s(ulong x, int n);
 
