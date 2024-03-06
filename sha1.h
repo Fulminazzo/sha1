@@ -18,11 +18,11 @@ typedef union Message_s {
 } Message;
 
 typedef struct SHA1vars_s {
-    ulong a;
-    ulong b;
-    ulong c;
-    ulong d;
-    ulong e;
+    WORD a;
+    WORD b;
+    WORD c;
+    WORD d;
+    WORD e;
 } SHA1vars;
 
 #endif //SHA1_SHA1_H
