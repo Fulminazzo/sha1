@@ -7,6 +7,7 @@ ulong preprocess_message(uchar *dst, const char *src) {
     ulong i, bits;
     unsigned int c, *tmp;
 
+    memset(dst, 0, length);
     tmp = (unsigned int *) dst;
 
     for (i = 0; i < length; i++) {
@@ -19,7 +20,7 @@ ulong preprocess_message(uchar *dst, const char *src) {
 
     // Set padding
     while ((i + BYTES_SIZE_LENGTH) % BYTES_LENGTH != 0)
-        dst[i++] = PADDING;
+        dst[i++] = (unsigned char) PADDING;
 
     // Convert length to bits
     bits = length * BITS_PER_BYTE;
